@@ -16,13 +16,13 @@ import org.springframework.web.bind.annotation.*;
 
     @RestController
     @RequestMapping("/api/socks")
-    @Tag(name = "Socks market", description = "CRUD операции для работы со складом носков.")
+    @Tag(name = "Sock Shop", description = "CRUD операции для работы со складом носков.")
     public class SockShopController {
 
-        private final SockShopServiceImpl storeForSockService;
+        private final SockShopServiceImpl sockShopService;
 
-        public SockShopController(SockShopServiceImpl storeForSockService) {
-            this.storeForSockService = storeForSockService;
+        public SockShopController(SockShopServiceImpl sockShopService) {
+            this.sockShopService = sockShopService;
         }
 
         @GetMapping("/get/{color}&{size}&{cottonMin}&{cottonMax}")
@@ -39,7 +39,7 @@ import org.springframework.web.bind.annotation.*;
                                                @PathVariable Size size,
                                                @PathVariable  int cottonMin,
                                                @PathVariable  int cottonMax){
-            int socksCount = storeForSockService.getSocks(color, size, cottonMin, cottonMax);
+            int socksCount = sockShopService.getSocks(color, size, cottonMin, cottonMax);
             if(socksCount == 0){
                 ResponseEntity.notFound().build();
             }
@@ -61,7 +61,7 @@ import org.springframework.web.bind.annotation.*;
                         description = "Произошла ошибка, не зависящая от вызывающей стороны.")
         })
         public ResponseEntity<Socks> addSocks (@RequestBody Socks socks) {
-            storeForSockService.addSocks(socks);
+            sockShopService.addSocks(socks);
             return ResponseEntity.ok().body(socks);
         }
 
@@ -80,7 +80,7 @@ import org.springframework.web.bind.annotation.*;
                         description = "Произошла ошибка, не зависящая от вызывающей стороны.")
         })
         public ResponseEntity<Socks> editSocks(@RequestBody Socks socks){
-            Socks socks1 = storeForSockService.editSocksFromStock(socks);
+            Socks socks1 = sockShopService.editSocksFromStock(socks);
             if(socks1 == null){
                 ResponseEntity.notFound().build();
             }
@@ -102,7 +102,7 @@ import org.springframework.web.bind.annotation.*;
                         description = "Произошла ошибка, не зависящая от вызывающей стороны.")
         })
         public ResponseEntity<Void> deleteSocks(@RequestBody Socks socks){
-            if(storeForSockService.removeSocks(socks)){
+            if(sockShopService.removeSocks(socks)){
                 return ResponseEntity.ok().build();
             }
             return ResponseEntity.notFound().build();

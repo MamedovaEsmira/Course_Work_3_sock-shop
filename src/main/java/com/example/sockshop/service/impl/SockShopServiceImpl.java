@@ -17,7 +17,7 @@ import java.util.*;
     @Service
     public class SockShopServiceImpl implements SockShopService {
 
-        public Set<Socks> socksStock = new LinkedHashSet<>();
+        public Set<Socks> socksSet = new LinkedHashSet<>();
         public Map<Operation, Socks> operationSocksMap = new LinkedHashMap<>();
 
         private final FilesServiceImpl filesService;
@@ -38,12 +38,12 @@ import java.util.*;
 
         @Override
         public void addSocks(Socks socks) {
-            if (socksStock.contains(socks)) {
-                for (Socks socks1 : socksStock) {
+            if (socksSet.contains(socks)) {
+                for (Socks socks1 : socksSet) {
                     socks1.setQuantity(socks1.getQuantity() + socks.getQuantity());
                 }
             } else {
-                socksStock.add(socks);
+                socksSet.add(socks);
             }
             operationSocksMap.put(new Operation(OperationType.ACCEPTANCE.getTranslate()), socks);
             saveToFile();
@@ -52,13 +52,13 @@ import java.util.*;
 
         @Override
         public int getSocks(Color color, Size size, int cottonMin, int cottonMax) {
-            for (Socks sock : socksStock) {
+            for (Socks sock : socksSet) {
                 if (sock.getColor().equals(color) &&
                         sock.getSize().equals(size) &&
                         sock.getCottonPart() > cottonMin &&
                         sock.getCottonPart() < cottonMax) {
                     return sock.getQuantity();
-                } else if (!socksStock.iterator().hasNext()) {
+                } else if (!socksSet.iterator().hasNext()) {
                     throw new ProductNotFoundException("Товар с данными параметрами не найден");
                 }
             }
@@ -68,7 +68,7 @@ import java.util.*;
 
         @Override
         public Socks editSocksFromStock(Socks socks) {
-            for (Socks socks1 : socksStock) {
+            for (Socks socks1 : socksSet) {
                 if (socks1.getColor().equals(socks.getColor()) &&
                         socks1.getSize().equals(socks.getSize()) &&
                         socks1.getCottonPart() == socks.getCottonPart() &&
@@ -77,7 +77,7 @@ import java.util.*;
                     operationSocksMap.put(new Operation(OperationType.EXTRADITION.getTranslate()), socks1);
                     saveToFile();
                     saveToOperationFile();
-                } else if (!socksStock.iterator().hasNext()) {
+                } else if (!socksSet.iterator().hasNext()) {
                     throw new ProductNotFoundException("Недостаточно товара на складе.");
                 }
             }
@@ -85,7 +85,7 @@ import java.util.*;
         }
         @Override
         public boolean removeSocks(Socks socks) {
-            for (Socks socks1 : socksStock) {
+            for (Socks socks1 : socksSet) {
                 if (socks1.getColor().equals(socks.getColor()) &&
                         socks1.getSize().equals(socks.getSize()) &&
                         socks1.getCottonPart() == socks.getCottonPart() &&
@@ -95,7 +95,7 @@ import java.util.*;
                     saveToFile();
                     saveToOperationFile();
                     return true;
-                } else if (!socksStock.iterator().hasNext()) {
+                } else if (!socksSet.iterator().hasNext()) {
                     throw new ProductNotFoundException("Невозможно удалить товар. Товар с данными параметрами не найден.");
                 }
             }
@@ -104,7 +104,7 @@ import java.util.*;
 
         private void saveToFile() {
             try {
-                String json = new ObjectMapper().writeValueAsString(socksStock);
+                String json = new ObjectMapper().writeValueAsString(socksSet);
                 filesService.saveToFile(json);
             } catch (JsonProcessingException e) {
                 throw new ProductNotFoundException("Ошибка в сохранении файла.");
@@ -114,7 +114,7 @@ import java.util.*;
         private void readFromFile() {
             String json = filesService.readFromFile();
             try {
-                socksStock = new ObjectMapper().readValue(json, new TypeReference<LinkedHashSet<Socks>>() {
+                socksSet = new ObjectMapper().readValue(json, new TypeReference<LinkedHashSet<Socks>>() {
                 });
             } catch (JsonProcessingException e) {
                 throw new ProductNotFoundException("Ошибка в чтении файла.");
