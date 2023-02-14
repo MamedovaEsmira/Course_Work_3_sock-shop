@@ -1,14 +1,10 @@
 package com.example.sockshop.service.impl;
 import com.example.sockshop.exceptions.ProductNotFoundException;
-import com.example.sockshop.model.Color;
-import com.example.sockshop.model.OperationType;
-import com.example.sockshop.model.Size;
-import com.example.sockshop.model.Socks;
+import com.example.sockshop.model.*;
 import com.example.sockshop.service.SockShopService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;

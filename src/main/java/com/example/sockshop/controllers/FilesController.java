@@ -35,7 +35,7 @@ public class FilesController {
             return ResponseEntity.ok()
                     .contentType(MediaType.APPLICATION_OCTET_STREAM)
                     .contentLength(file.length())
-                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"socksMarket.json\"")
+                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"sockShop.json\"")
                     .body(resource);
         } else {
             return ResponseEntity.noContent().build();
