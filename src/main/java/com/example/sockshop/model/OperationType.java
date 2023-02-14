@@ -1,4 +1,4 @@
-package com.example.storeforsocks.model;
+package com.example.sockshop.model;
 public enum OperationType {
     ACCEPTANCE("приемка"), WRITE_DOWNS("списание"), EXTRADITION("выдача");
     private final String translate;

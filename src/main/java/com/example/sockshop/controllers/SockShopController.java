@@ -1,9 +1,9 @@
-package com.example.storeforsocks.controllers;
+package com.example.sockshop.controllers;
 
-import com.example.storeforsocks.model.Color;
-import com.example.storeforsocks.model.Size;
-import com.example.storeforsocks.model.Socks;
-import com.example.storeforsocks.service.impl.StoreForSockServiceImpl;
+import com.example.sockshop.model.Color;
+import com.example.sockshop.model.Size;
+import com.example.sockshop.model.Socks;
+import com.example.sockshop.service.impl.SockShopServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -17,11 +17,11 @@ import org.springframework.web.bind.annotation.*;
     @RestController
     @RequestMapping("/api/socks")
     @Tag(name = "Socks market", description = "CRUD операции для работы со складом носков.")
-    public class StoreForSockController {
+    public class SockShopController {
 
-        private final StoreForSockServiceImpl storeForSockService;
+        private final SockShopServiceImpl storeForSockService;
 
-        public StoreForSockController(StoreForSockServiceImpl storeForSockService) {
+        public SockShopController(SockShopServiceImpl storeForSockService) {
             this.storeForSockService = storeForSockService;
         }
 

@@ -1,4 +1,4 @@
-package com.example.storeforsocks.model;
+package com.example.sockshop.model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

@@ -1,10 +1,10 @@
-package com.example.storeforsocks.service.impl;
-import com.example.storeforsocks.exceptions.ProductNotFoundException;
-import com.example.storeforsocks.model.Color;
-import com.example.storeforsocks.model.OperationType;
-import com.example.storeforsocks.model.Size;
-import com.example.storeforsocks.model.Socks;
-import com.example.storeforsocks.service.StoreForSockService;
+package com.example.sockshop.service.impl;
+import com.example.sockshop.exceptions.ProductNotFoundException;
+import com.example.sockshop.model.Color;
+import com.example.sockshop.model.OperationType;
+import com.example.sockshop.model.Size;
+import com.example.sockshop.model.Socks;
+import com.example.sockshop.service.SockShopService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -15,14 +15,14 @@ import javax.annotation.PostConstruct;
 import java.util.*;
 
     @Service
-    public class StoreForSockServiceImpl implements StoreForSockService {
+    public class SockShopServiceImpl implements SockShopService {
 
         public Set<Socks> socksStock = new LinkedHashSet<>();
         public Map<Operation, Socks> operationSocksMap = new LinkedHashMap<>();
 
         private final FilesServiceImpl filesService;
 
-        public StoreForSockServiceImpl(FilesServiceImpl filesService) {
+        public SockShopServiceImpl(FilesServiceImpl filesService) {
             this.filesService = filesService;
         }
 

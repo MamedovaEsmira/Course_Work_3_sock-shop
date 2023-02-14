@@ -1,5 +1,5 @@
-package com.example.storeforsocks.service.impl;
-import com.example.storeforsocks.service.FilesService;
+package com.example.sockshop.service.impl;
+import com.example.sockshop.service.FilesService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 

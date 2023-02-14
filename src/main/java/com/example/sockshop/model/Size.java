@@ -1,4 +1,4 @@
-package com.example.storeforsocks.model;
+package com.example.sockshop.model;
 
 public enum Size {
     R35(35), R35_5(35.5),R36(36), R36_5(36.5), R37(37), R37_5(37.5), R38(38), R38_5(38.5), R39(39),

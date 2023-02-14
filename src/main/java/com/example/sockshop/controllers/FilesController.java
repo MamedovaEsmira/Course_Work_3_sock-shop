@@ -1,7 +1,7 @@
-package com.example.storeforsocks.controllers;
+package com.example.sockshop.controllers;
 
-import com.example.storeforsocks.exceptions.FileNotFoundException;
-import com.example.storeforsocks.service.impl.FilesServiceImpl;
+import com.example.sockshop.exceptions.FileNotFoundException;
+import com.example.sockshop.service.impl.FilesServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
