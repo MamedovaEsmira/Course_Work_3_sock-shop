@@ -37,8 +37,8 @@ import org.springframework.web.bind.annotation.*;
         })
         public ResponseEntity<Object> getSocks(@RequestParam (required = false) Color color,
                                                @RequestParam (required = false) Size size,
-                                               @RequestParam (required = false) int cottonMin,
-                                               @RequestParam (required = false) int cottonMax){
+                                               int cottonMin,
+                                               int cottonMax){
             int socksCount = sockShopService.getSocks(color, size, cottonMin, cottonMax);
             if(socksCount == 0){
                 ResponseEntity.notFound().build();
