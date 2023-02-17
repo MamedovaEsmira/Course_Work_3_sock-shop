@@ -35,10 +35,10 @@ import org.springframework.web.bind.annotation.*;
                 @ApiResponse(responseCode = "500",
                         description = "Произошла ошибка, не зависящая от вызывающей стороны.")
         })
-        public ResponseEntity<Object> getSocks(@PathVariable Color color,
-                                               @PathVariable Size size,
-                                               @PathVariable  int cottonMin,
-                                               @PathVariable  int cottonMax){
+        public ResponseEntity<Object> getSocks(@RequestParam (required = false) Color color,
+                                               @RequestParam (required = false) Size size,
+                                               @RequestParam (required = false) int cottonMin,
+                                               @RequestParam (required = false) int cottonMax){
             int socksCount = sockShopService.getSocks(color, size, cottonMin, cottonMax);
             if(socksCount == 0){
                 ResponseEntity.notFound().build();

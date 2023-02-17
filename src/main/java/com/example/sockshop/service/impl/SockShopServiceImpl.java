@@ -13,7 +13,7 @@ import java.util.*;
     @Service
     public class SockShopServiceImpl implements SockShopService {
 
-        public Set<Socks> socksSet = new LinkedHashSet<>();
+        private Set<Socks> socksSet = new LinkedHashSet<>();
         public Map<Operation, Socks> operationSocksMap = new LinkedHashMap<>();
 
         private final FilesServiceImpl filesService;
