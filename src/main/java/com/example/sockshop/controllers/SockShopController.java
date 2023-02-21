@@ -25,7 +25,7 @@ import org.springframework.web.bind.annotation.*;
             this.sockShopService = sockShopService;
         }
 
-        @GetMapping("/get/{color}&{size}&{cottonMin}&{cottonMax}")
+        @GetMapping()
         @Operation(summary = "Вывод количества товара.", description = "Вывод количества носков по заданным параметрам.")
         @ApiResponses(value = {
                 @ApiResponse(responseCode = "200",
@@ -35,10 +35,10 @@ import org.springframework.web.bind.annotation.*;
                 @ApiResponse(responseCode = "500",
                         description = "Произошла ошибка, не зависящая от вызывающей стороны.")
         })
-        public ResponseEntity<Object> getSocks(@RequestParam (required = false) Color color,
-                                               @RequestParam (required = false) Size size,
-                                               int cottonMin,
-                                               int cottonMax){
+        public ResponseEntity<Object> getSocks(@RequestParam(name = "color") Color color,
+                                               @RequestParam(name = "size") Size size,
+                                               @RequestParam(name = "minCotton") int cottonMin,
+                                               @RequestParam(name = "maxCotton") int cottonMax) {
             int socksCount = sockShopService.getSocks(color, size, cottonMin, cottonMax);
             if(socksCount == 0){
                 ResponseEntity.notFound().build();

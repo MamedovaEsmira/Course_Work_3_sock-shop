@@ -1,23 +1,18 @@
 package com.example.sockshop.service.impl;
 import com.example.sockshop.exceptions.ProductNotFoundException;
 import com.example.sockshop.model.*;
-
 import com.example.sockshop.service.SockShopService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
-
 import org.springframework.stereotype.Service;
-
 import javax.annotation.PostConstruct;
 import java.util.*;
 
     @Service
     public class SockShopServiceImpl implements SockShopService {
-
-        public Set<Socks> socksSet = new LinkedHashSet<>();
-        public Map<Operation, Socks> operationSocksMap = new LinkedHashMap<>();
+        private Set<Socks> socksSet = new LinkedHashSet<>();
+        private Map<Operation, Socks> operationSocksMap = new LinkedHashMap<>();
 
         private final FilesServiceImpl filesService;
 
@@ -37,16 +32,25 @@ import java.util.*;
 
         @Override
         public void addSocks(Socks socks) {
-            if (socksSet.contains(socks)) {
-                    socks.setQuantity(socks.getQuantity() + socks.getQuantity());
+            if (!socksSet.isEmpty() && socksSet.contains(socks)) {
+                for (Socks socks1 : socksSet) {
+                    if (Objects.equals(socks1.getClass(), socks)) {
+                        int oldQuantity = socks1.getClass().getModifiers();
+                        int newQuantity = oldQuantity + socks.getQuantity();
+                        Socks socksNew = new Socks(socks.getColor(), socks.getSize(), socks.getCottonPart(),
+                                newQuantity);
+                        socksSet.add(socksNew);
+                        operationSocksMap.put(new Operation(OperationType.ACCEPTANCE.getTranslate()), socksNew);
+                        saveToFile();
+                    }
+                }
             } else {
                 socksSet.add(socks);
+                operationSocksMap.put(new Operation(OperationType.ACCEPTANCE.getTranslate()), socks);
+                saveToFile();
+                saveToOperationFile();
             }
-            operationSocksMap.put(new Operation(OperationType.ACCEPTANCE.getTranslate()), socks);
-            saveToFile();
-            saveToOperationFile();
         }
-
         @Override
         public int getSocks(Color color, Size size, int cottonMin, int cottonMax) {
             for (Socks sock : socksSet) {
