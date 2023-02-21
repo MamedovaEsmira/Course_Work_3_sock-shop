@@ -1,13 +1,12 @@
-package com.example.storeforsocks;
+package com.example.sockshop;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-
 @SpringBootApplication
-public class StoreforsocksApplication {
+public class SockShopApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(StoreforsocksApplication.class, args);
+		SpringApplication.run(SockShopApplication.class, args);
 	}
 
 }

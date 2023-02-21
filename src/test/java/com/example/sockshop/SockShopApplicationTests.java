@@ -1,10 +1,10 @@
-package com.example.storeforsocks;
+package com.example.sockshop;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class StoreforsocksApplicationTests {
+class SockShopApplicationTests {
 
 	@Test
 	void contextLoads() {
